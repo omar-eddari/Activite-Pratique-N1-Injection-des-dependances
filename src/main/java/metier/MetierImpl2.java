@@ -1,20 +1,21 @@
 package metier;
 
-import dao.DaoImpl;
 import dao.IDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
 /**
  * @author user
  **/
 @Component
-public class MetierImpl implements IMetier{
+@Primary
+public class MetierImpl2 implements IMetier{
     @Autowired
     private IDao dao;
     public double calcul() {
         double nb=dao.getValue();
-        return 2*nb;
+        return 3*nb;
     }
 
     public void setDao(IDao dao) {
