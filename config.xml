@@ -1,7 +1,7 @@
 <beans>
-    <bean id="dao" class="DaoImpl"/>
+    <bean id="dao" class="dao.DaoImpl"/>
 
-    <bean id="service" class="ServiceImpl">
+    <bean id="metier" class="metier.MetierImpl">
         <property name="dao" ref="dao"/>
     </bean>
 </beans>
