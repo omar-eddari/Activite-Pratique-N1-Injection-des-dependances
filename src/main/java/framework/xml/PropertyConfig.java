@@ -1,8 +1,15 @@
-package framework.core;
+package framework.xml;
 
-public class Property {
+import jakarta.xml.bind.annotation.*;
+
+@XmlAccessorType(XmlAccessType.FIELD)
+public class PropertyConfig {
+
+    @XmlAttribute
     private String name;
-    private String ref; // reference to another bean
+
+    @XmlAttribute
+    private String ref;
 
     // getters & setters
 
@@ -20,13 +27,5 @@ public class Property {
 
     public void setRef(String ref) {
         this.ref = ref;
-    }
-
-    @Override
-    public String toString() {
-        return "Property{" +
-                "name='" + name + '\'' +
-                ", ref='" + ref + '\'' +
-                '}';
     }
 }

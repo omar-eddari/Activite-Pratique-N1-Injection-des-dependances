@@ -1,11 +1,19 @@
-package framework.core;
+package framework.xml;
 
+import jakarta.xml.bind.annotation.*;
 import java.util.List;
 
-public class BeanDefinition {
+@XmlAccessorType(XmlAccessType.FIELD)
+public class BeanConfig {
+
+    @XmlAttribute
     private String id;
+
+    @XmlAttribute(name = "class")
     private String className;
-    private List<Property> properties;
+
+    @XmlElement(name = "property")
+    private List<PropertyConfig> properties;
 
     // getters & setters
 
@@ -25,20 +33,11 @@ public class BeanDefinition {
         this.className = className;
     }
 
-    public List<Property> getProperties() {
+    public List<PropertyConfig> getProperties() {
         return properties;
     }
 
-    public void setProperties(List<Property> properties) {
+    public void setProperties(List<PropertyConfig> properties) {
         this.properties = properties;
-    }
-
-    @Override
-    public String toString() {
-        return "BeanDefinition{" +
-                "id='" + id + '\'' +
-                ", className='" + className + '\'' +
-                ", properties=" + properties +
-                '}';
     }
 }
