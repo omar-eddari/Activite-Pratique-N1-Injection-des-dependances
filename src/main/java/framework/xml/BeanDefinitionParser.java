@@ -9,6 +9,8 @@ public class BeanDefinitionParser {
 
     public List<BeanDefinition> parse(Beans beans) {
         List<BeanDefinition> list = new ArrayList<>();
+        List<ConstructorArg> args = new ArrayList<>();
+
 
         for (BeanConfig beanConfig : beans.getBeans()) {
             BeanDefinition bd = new BeanDefinition();
@@ -23,10 +25,17 @@ public class BeanDefinitionParser {
                     p.setName(pc.getName());
                     p.setRef(pc.getRef());
                     props.add(p);
+                    bd.setProperties(props);
                 }
             }
-
-            bd.setProperties(props);
+            if (beanConfig.getConstructorArgs() != null) {
+                for (ConstructorArgConfig cac : beanConfig.getConstructorArgs()) {
+                    ConstructorArg ca = new ConstructorArg();
+                    ca.setRef(cac.getRef());
+                    args.add(ca);
+                    bd.setConstructorArgs(args);
+                }
+            }
             list.add(bd);
         }
 

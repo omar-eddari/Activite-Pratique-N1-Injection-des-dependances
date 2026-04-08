@@ -6,8 +6,16 @@ public class BeanDefinition {
     private String id;
     private String className;
     private List<Property> properties;
-
+    private List<ConstructorArg> constructorArgs;
     // getters & setters
+
+    public List<ConstructorArg> getConstructorArgs() {
+        return constructorArgs;
+    }
+
+    public void setConstructorArgs(List<ConstructorArg> constructorArgs) {
+        this.constructorArgs = constructorArgs;
+    }
 
     public String getId() {
         return id;

@@ -1,16 +1,18 @@
 package framework.context;
 
-import framework.core.*;
-import java.lang.reflect.Field;
+import framework.core.BeanDefinition;
+import framework.core.Property;
+import java.lang.reflect.Method;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ApplicationContext {
+public class ApplicationContextSetterInjection {
 
     private Map<String, Object> beans = new HashMap<>();
 
-    public ApplicationContext(List<BeanDefinition> definitions) {
+    public ApplicationContextSetterInjection(List<BeanDefinition> definitions) {
         try {
             // Step 1: Instantiate all beans
             for (BeanDefinition bd : definitions) {
@@ -19,7 +21,7 @@ public class ApplicationContext {
                 beans.put(bd.getId(), instance);
             }
 
-            // Step 2: Inject dependencies (Field injection for now)
+            // Step 2: Inject dependencies (Setter Injection)
             for (BeanDefinition bd : definitions) {
                 Object bean = beans.get(bd.getId());
 
@@ -27,9 +29,19 @@ public class ApplicationContext {
                     for (Property prop : bd.getProperties()) {
                         Object dependency = beans.get(prop.getRef());
 
-                        Field field = bean.getClass().getDeclaredField(prop.getName());
-                        field.setAccessible(true);
-                        field.set(bean, dependency);
+                        // Build setter name
+                        String setterName = "set" +
+                                prop.getName().substring(0, 1).toUpperCase() +
+                                prop.getName().substring(1);
+
+                        // Find method
+                        for (Method method : bean.getClass().getMethods()) {
+                            if (method.getName().equals(setterName)
+                                    && method.getParameterCount() == 1) {
+
+                                method.invoke(bean, dependency);
+                            }
+                        }
                     }
                 }
             }

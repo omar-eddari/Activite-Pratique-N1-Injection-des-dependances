@@ -1,6 +1,8 @@
 package framework;
 
 import framework.context.ApplicationContext;
+import framework.context.ApplicationContextConstructorInjection;
+import framework.context.ApplicationContextSetterInjection;
 import framework.xml.BeanDefinitionParser;
 import framework.xml.Beans;
 import framework.xml.XmlBeanDefinitionReader;
@@ -18,7 +20,7 @@ public class TestContext {
         BeanDefinitionParser parser = new BeanDefinitionParser();
         var definitions = parser.parse(beansXml);
 
-        ApplicationContext context = new ApplicationContext(definitions);
+        ApplicationContextConstructorInjection context = new ApplicationContextConstructorInjection(definitions);
 
         MetierImpl service = (MetierImpl)  context.getBean("metier");
         System.out.println(service.calcul());

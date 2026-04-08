@@ -14,8 +14,17 @@ public class BeanConfig {
 
     @XmlElement(name = "property")
     private List<PropertyConfig> properties;
-
+    @XmlElement(name = "constructor-arg")
+    private List<ConstructorArgConfig> constructorArgs;
     // getters & setters
+
+    public List<ConstructorArgConfig> getConstructorArgs() {
+        return constructorArgs;
+    }
+
+    public void setConstructorArgs(List<ConstructorArgConfig> constructorArgs) {
+        this.constructorArgs = constructorArgs;
+    }
 
     public String getId() {
         return id;
