@@ -1,2 +1,2 @@
-dao.DaoImpl
-metier.MetierImpl
+Partie1.dao.DaoImpl
+Partie1.metier.MetierImpl

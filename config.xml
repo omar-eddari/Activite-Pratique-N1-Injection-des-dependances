@@ -1,7 +1,7 @@
 <beans>
-    <bean id="dao" class="dao.DaoImpl"/>
+    <bean id="dao" class="Partie1.dao.DaoImpl"/>
 
-    <bean id="metier" class="metier.MetierImpl">
+    <bean id="metier" class="Partie1.metier.MetierImpl">
         <constructor-arg ref="dao"/>
     </bean>
 </beans>
